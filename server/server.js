@@ -2,22 +2,49 @@ import express from 'express';
 import logger from 'morgan';
 import { randomBytes } from 'crypto';
 import cors from 'cors';
+import dotenv  from "dotenv";
+import { MongoClient, ServerApiVersion } from 'mongodb';
 
+dotenv.config()
+const PORT = process.env.PORT || 4000;
 const app = express();
+let collection;
+
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
 
-app.get('/getInfo', (req, res) => {
+app.get('/getInfo', async (req, res) => {
+    const result = await collection.find({}).toArray();
+    console.log(result)
     res.status(200).json({
-        '1234': {
-            name: 'Jason',
-            description: 'i am jason'
-        }
+        result
     })
 })
 
-app.listen(4000, () => {
-    console.log('Listening on port 4000');
+
+
+async function connect() {
+
+    const client = await MongoClient.connect(process.env.ATLAS_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverApi: ServerApiVersion.v1,          
+    });
+
+    await init(client);
+    console.log('connected')
+  }
+
+  async function init(client) {
+    const db = client.db('Database');
+    collection = db.collection('users');
+}
+
+
+
+await connect();
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
   });

@@ -10,15 +10,18 @@ function App() {
   useEffect(() => {
     axios.get('/getInfo')
     .then(res => {
+      console.log(res)
       setContent(res.data)
     })
   }, [])
 
-  const cards = Object.keys(content).map(key => {
-    return <Card key={key} name={content[key]["name"]} description={content[key]["description"]}/>
+  console.log(content)
+
+  const cards = Object.keys(content).length === 0 ? [] : content.result.map(obj => {
+    return <Card key={obj['_id']} name={obj["name"]} description={obj["description"]}/>
   })
 
-  console.log(content)
+ 
 
   return (
     <div className="App">
