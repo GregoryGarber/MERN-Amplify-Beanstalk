@@ -15,8 +15,10 @@ function App() {
   }, [])
 
   const cards = Object.keys(content).map(key => {
-    <Card key={key} name={content[key]["name"]} description={content[key]["description"]}/>
+    return <Card key={key} name={content[key]["name"]} description={content[key]["description"]}/>
   })
+
+  console.log(content)
 
   return (
     <div className="App">
