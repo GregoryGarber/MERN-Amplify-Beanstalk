@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react';
 import Card from './card';
 import axios from 'axios'
 
+console.log(process.env.REACT_APP_URL)
+
 function App() {
   const [content, setContent] = useState({})
 
   useEffect(() => {
-    axios.get('/getInfo')
+    axios.get(`${process.env.REACT_APP_URL}/getInfo`)
     .then(res => {
       console.log(res)
       setContent(res.data)
