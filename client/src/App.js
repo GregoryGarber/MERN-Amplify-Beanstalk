@@ -17,7 +17,7 @@ function App() {
 
   console.log(content)
 
-  const cards = Object.keys(content).length === 0 ? [] : content.result.map(obj => {
+  const cards = Object.keys(content).length === 0 ? [] : content.result === undefined ? [] : content.result.map(obj => {
     return <Card key={obj['_id']} name={obj["name"]} description={obj["description"]}/>
   })
 
