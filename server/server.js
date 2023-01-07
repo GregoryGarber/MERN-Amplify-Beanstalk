@@ -1,6 +1,8 @@
 import express from "express";
 import logger from "morgan";
-import { randomBytes } from "crypto";
+import path from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 import cors from "cors";
 import dotenv from "dotenv";
 import { MongoClient, ServerApiVersion } from "mongodb";
@@ -39,11 +41,11 @@ async function init(client) {
 }
 
 // Serve static files
-// const __dirname = dirname(fileURLToPath(import.meta.url));
-// app.use(express.static(path.join(__dirname, 'client', 'build')));
-// app.use((req, res, next) => {
-//     res.sendFile(path.join(__dirname, "client/build", "build", "index.html"));
-//   });
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.join(__dirname, "../client", "build")));
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "client/build", "build", "index.html"));
+});
 
 await connect();
 
