@@ -42,9 +42,9 @@ async function init(client) {
 
 // Serve static files
 const __dirname = dirname(fileURLToPath(import.meta.url));
-app.use(express.static(path.join(__dirname, "../client", "build")));
+app.use(express.static(path.join(__dirname, "/client", "build")));
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "client/build", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 await connect();
