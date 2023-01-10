@@ -51,6 +51,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 //   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 // });
 console.log("suck my balllllz");
+console.log(__dirname);
 if (process.env.build === "prod") {
   app.use(express.static(path.join(__dirname, "./ui/public")));
 } else {
@@ -58,6 +59,7 @@ if (process.env.build === "prod") {
 }
 
 await connect();
+console.log(__dirname);
 console.log(process.env.ATLAS_URI);
 console.log(process.env.test);
 console.log(process.env.build);
