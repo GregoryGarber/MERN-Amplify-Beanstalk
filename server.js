@@ -60,6 +60,8 @@ if (process.env.build === "prod") {
 await connect();
 console.log(process.env.ATLAS_URI);
 console.log(process.env.test);
+console.log(process.env.build);
+console.log(process.env.build === "prod");
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
