@@ -59,7 +59,8 @@ if (process.env.build === "prod") {
 }
 
 await connect();
-console.log(__dirname);
+console.log("check dirname", __dirname);
+console.log(path);
 console.log(process.env.ATLAS_URI);
 console.log(process.env.test);
 console.log(process.env.build);
