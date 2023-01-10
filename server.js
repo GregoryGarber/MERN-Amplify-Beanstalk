@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 dotenv.config();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 const app = express();
 let collection;
 
@@ -22,6 +22,10 @@ app.get("/getInfo", async (req, res) => {
   res.status(200).json({
     result,
   });
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 async function connect() {
@@ -42,12 +46,20 @@ async function init(client) {
 
 // Serve static files
 const __dirname = dirname(fileURLToPath(import.meta.url));
-app.use(express.static(path.join(__dirname, "/client", "build")));
-app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "/client", "build")));
+// app.use((req, res, next) => {
+//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
+console.log("suck my balllllz");
+if (process.env.build === "prod") {
+  app.use(express.static(path.join(__dirname, "./ui/public")));
+} else {
+  app.use(express.static(path.join(__dirname, "./ui/build")));
+}
 
 await connect();
+console.log(process.env.ATLAS_URI);
+console.log(process.env.test);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
