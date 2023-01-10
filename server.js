@@ -53,7 +53,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 console.log("suck my balllllz");
 console.log(__dirname);
 if (process.env.build === "prod") {
-  app.use(express.static(path.join(__dirname, "./ui/public")));
+  console.log("in prod");
+  app.use(express.static(path.join("./var/app/current/ui/public")));
 } else {
   app.use(express.static(path.join(__dirname, "./ui/build")));
 }
