@@ -51,7 +51,7 @@ console.log("suck my balllllz");
 console.log(__dirname);
 if (process.env.build === "prod") {
   console.log("in prod");
-  app.use(express.static("/var/app/current/ui/public"));
+  // app.use(express.static("/var/app/current/ui/public"));
 } else {
   app.use(express.static(path.join(__dirname, "./ui/build")));
 }
