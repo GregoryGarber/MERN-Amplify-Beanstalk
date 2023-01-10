@@ -46,15 +46,12 @@ async function init(client) {
 
 // Serve static files
 const __dirname = dirname(fileURLToPath(import.meta.url));
-// app.use(express.static(path.join(__dirname, "/client", "build")));
-// app.use((req, res, next) => {
-//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-// });
+
 console.log("suck my balllllz");
 console.log(__dirname);
 if (process.env.build === "prod") {
   console.log("in prod");
-  app.use(express.static(path.join("./var/app/current/ui/public")));
+  app.use(express.static("/var/app/current/ui/public"));
 } else {
   app.use(express.static(path.join(__dirname, "./ui/build")));
 }
